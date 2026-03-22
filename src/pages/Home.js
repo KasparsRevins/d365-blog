@@ -1,4 +1,3 @@
-
 const Home = () => {
 
   const splitOfferings = [
@@ -6,7 +5,6 @@ const Home = () => {
       id: 5,
       title: "Custom Enhanced Email Templates",
       description: "Branded, responsive email templates built to deliver consistent communications across all touchpoints.",
-      imagePosition: "right", // image on right, text on left
       bg: "linear-gradient(135deg, #f3e8fd 0%, #dbb8f5 100%)",
       icon: (
         <svg viewBox="0 0 80 80" width="80" height="80" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -20,7 +18,6 @@ const Home = () => {
       id: 6,
       title: "Training Documentation Videos",
       description: "Step-by-step video guides and documentation to onboard your team and maximize platform adoption.",
-      imagePosition: "left", // image on left, text on right
       bg: "linear-gradient(135deg, #fdecea 0%, #f5b8b0 100%)",
       icon: (
         <svg viewBox="0 0 80 80" width="80" height="80" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -35,7 +32,6 @@ const Home = () => {
       id: 7,
       title: "Data Migration Document Related Strategy",
       description: "Structured migration planning and documentation to ensure smooth, risk-free data transitions.",
-      imagePosition: "right", // image on right, text on left  — last item: image left, no right column
       bg: "linear-gradient(135deg, #e8f6fd 0%, #a8d8f0 100%)",
       icon: (
         <svg viewBox="0 0 80 80" width="80" height="80" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -119,196 +115,308 @@ const Home = () => {
 
   return (
     <div className="home">
-      <section style={{
-        background: '#f5f5f5',
-        padding: '5rem 2rem',
-        textAlign: 'center',
-        marginLeft: 'calc(-50vw + 50%)',
-        marginRight: 'calc(-50vw + 50%)',
-        width: '100vw',
-      }}>
-        <h1 style={{
-          fontSize: '4.5rem',
-          fontWeight: '700',
-          color: '#1a1a1a',
-          margin: '0 0 1.5rem 0',
-          lineHeight: '1.15',
-        }}>
-          Welcome to Dynamics 365
-        </h1>
-        <p style={{
-          fontSize: '1.4rem',
-          color: '#444',
-          maxWidth: '640px',
-          margin: '0 auto 2rem auto',
-          lineHeight: '1.65',
-        }}>
-          End to end document solutions built for your Dynamics 365 implementation.
-        </p>
+      <style>{`
+        .hero-section {
+          background: #f5f5f5;
+          padding: 5rem 2rem;
+          text-align: center;
+          margin-left: calc(-50vw + 50%);
+          margin-right: calc(-50vw + 50%);
+          width: 100vw;
+        }
+        .hero-section h1 {
+          font-size: 4.5rem;
+          font-weight: 700;
+          color: #1a1a1a;
+          margin: 0 0 1.5rem 0;
+          line-height: 1.15;
+        }
+        .hero-section p {
+          font-size: 1.4rem;
+          color: #444;
+          max-width: 640px;
+          margin: 0 auto 2rem auto;
+          line-height: 1.65;
+        }
+
+        .offerings-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 2.5rem 3rem;
+          padding: 3rem 2rem;
+          max-width: 1100px;
+          margin: 0 auto;
+        }
+        .offering-card {
+          display: flex;
+          flex-direction: column;
+          gap: 0.75rem;
+        }
+        .offering-card-image {
+          border-radius: 12px;
+          height: 180px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+        }
+        .offering-card h2 {
+          font-size: 1.85rem;
+          font-weight: 600;
+          color: #1a1a1a;
+          margin: 0;
+        }
+        .offering-card p {
+          font-size: 1.2rem;
+          color: #444;
+          margin: 0;
+          line-height: 1.5;
+        }
+
+        .full-width-section {
+          background: #f5f5f5;
+          padding: 5rem 2rem;
+          text-align: center;
+          margin-left: calc(-50vw + 50%);
+          margin-right: calc(-50vw + 50%);
+          width: 100vw;
+        }
+        .full-width-section h2 {
+          font-size: 4.5rem;
+          font-weight: 700;
+          color: #1a1a1a;
+          margin: 0 0 1.5rem 0;
+          line-height: 1.15;
+        }
+        .full-width-section p {
+          font-size: 1.2rem;
+          color: #444;
+          max-width: 640px;
+          margin: 0 auto;
+          line-height: 1.65;
+        }
+
+        .split-section {
+          padding: 2rem;
+          max-width: 1100px;
+          margin: 0 auto;
+        }
+        .split-row {
+          display: flex;
+          align-items: center;
+          gap: 2rem;
+          margin-bottom: 3rem;
+        }
+        .split-row.text-first { flex-direction: row; }
+        .split-row.image-first { flex-direction: row-reverse; }
+        .split-image {
+          border-radius: 16px;
+          flex: 1;
+          min-height: 220px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .split-text {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          gap: 0.75rem;
+          padding: 1rem 2rem;
+        }
+        .split-text h2 {
+          font-size: 1.85rem;
+          font-weight: 700;
+          color: #1a1a1a;
+          margin: 0;
+        }
+        .split-text p {
+          font-size: 1.2rem;
+          color: #444;
+          margin: 0;
+          line-height: 1.65;
+        }
+
+        .questions-section {
+          background: #f5f5f5;
+          padding: 5rem 2rem;
+          text-align: center;
+          margin-left: calc(-50vw + 50%);
+          margin-right: calc(-50vw + 50%);
+          width: 100vw;
+        }
+        .questions-section h2 {
+          font-size: 4.5rem;
+          font-weight: 700;
+          color: #1a1a1a;
+          margin: 0 0 3rem 0;
+          line-height: 1.15;
+        }
+        .questions-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 1.5rem;
+          max-width: 1100px;
+          margin: 0 auto;
+          text-align: left;
+        }
+        .question-card {
+          background: white;
+          border-radius: 8px;
+          padding: 2rem;
+          display: flex;
+          flex-direction: column;
+          gap: 0.75rem;
+          box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+        }
+        .question-card h3 {
+          font-size: 1.85rem;
+          font-weight: 700;
+          color: #1a1a1a;
+          margin: 0;
+        }
+        .question-card p {
+          font-size: 1.2rem;
+          color: #444;
+          margin: 0;
+          line-height: 1.6;
+          flex-grow: 1;
+        }
+        .question-card a {
+          color: #0078d4;
+          font-size: 0.9rem;
+          text-decoration: none;
+          font-weight: 500;
+        }
+
+        /* Tablet — 768px to 1024px */
+        @media (max-width: 1024px) {
+          .hero-section h1,
+          .full-width-section h2,
+          .questions-section h2 {
+            font-size: 3rem;
+          }
+          .offerings-grid {
+            gap: 2rem;
+          }
+          .split-text h2,
+          .offering-card h2,
+          .question-card h3 {
+            font-size: 1.5rem;
+          }
+          .questions-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+
+        /* Mobile — up to 768px */
+        @media (max-width: 768px) {
+          .hero-section,
+          .full-width-section,
+          .questions-section {
+            padding: 3rem 1.25rem;
+          }
+          .hero-section h1,
+          .full-width-section h2,
+          .questions-section h2 {
+            font-size: 2rem;
+          }
+          .hero-section p,
+          .full-width-section p {
+            font-size: 1rem;
+          }
+
+          .offerings-grid {
+            grid-template-columns: 1fr;
+            padding: 2rem 1.25rem;
+            gap: 2rem;
+          }
+
+          .split-section {
+            padding: 1.25rem;
+          }
+          .split-row.text-first,
+          .split-row.image-first {
+            flex-direction: column;
+          }
+          .split-image {
+            width: 100%;
+            min-height: 180px;
+          }
+          .split-text {
+            padding: 0.5rem 0;
+          }
+          .split-text h2,
+          .offering-card h2,
+          .question-card h3 {
+            font-size: 1.25rem;
+          }
+          .split-text p,
+          .offering-card p,
+          .question-card p {
+            font-size: 1rem;
+          }
+
+          .questions-grid {
+            grid-template-columns: 1fr;
+          }
+          .questions-section h2 {
+            font-size: 1.75rem;
+          }
+        }
+      `}</style>
+
+      {/* Hero */}
+      <section className="hero-section">
+        <h1>Welcome to Dynamics 365</h1>
+        <p>End to end document solutions built for your Dynamics 365 implementation.</p>
       </section>
 
-      {/* Offerings Section — Microsoft-style card grid */}
-      <section style={{ padding: '3rem 2rem', maxWidth: '1100px', margin: '0 auto' }}>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(2, 1fr)',
-          gap: '2.5rem 3rem',
-        }}>
-          {offerings.map(item => (
-            <div key={item.id} style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-              {/* Image / Illustration card */}
-              <div style={{
-                background: item.bg,
-                borderRadius: '12px',
-                height: '180px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                overflow: 'hidden',
-              }}>
-                {item.icon}
-              </div>
-              {/* Text below the card */}
-              <h2 style={{
-                fontSize: '1.85rem',
-                fontWeight: '600',
-                color: '#1a1a1a',
-                margin: 0,
-              }}>
-                {item.title}
-              </h2>
-              <p style={{
-                fontSize: '1.2rem',
-                color: '#444',
-                margin: 0,
-                lineHeight: '1.5',
-              }}>
-                {item.description}
-              </p>
+      {/* Offerings Grid — 4 cards */}
+      <section className="offerings-grid">
+        {offerings.map(item => (
+          <div key={item.id} className="offering-card">
+            <div className="offering-card-image" style={{ background: item.bg }}>
+              {item.icon}
             </div>
-          ))}
-        </div>
+            <h2>{item.title}</h2>
+            <p>{item.description}</p>
+          </div>
+        ))}
       </section>
 
-      {/* "Fraction of a cost" Section */}
-      <section style={{
-        background: '#f5f5f5',
-        padding: '5rem 2rem',
-        textAlign: 'center',
-        marginLeft: 'calc(-50vw + 50%)',
-        marginRight: 'calc(-50vw + 50%)',
-        width: '100vw',
-      }}>
-        <h2 style={{
-          fontSize: '4.5rem',
-          fontWeight: '700',
-          color: '#1a1a1a',
-          margin: '0 0 1.5rem 0',
-          lineHeight: '1.15',
-        }}>
-          All for a fraction of a cost of standard implementation!
-        </h2>
-        <p style={{
-          fontSize: '1.2rem',
-          color: '#444',
-          maxWidth: '640px',
-          margin: '0 auto',
-          lineHeight: '1.65',
-        }}>
+      {/* Fraction of a cost */}
+      <section className="full-width-section">
+        <h2>All for a fraction of a cost of standard implementation!</h2>
+        <p>
           Get enterprise-grade Dynamics 365 documents, templates, and training resources —
           without the enterprise price tag.
         </p>
       </section>
 
-      {/* Split Layout Section — last 3 offerings */}
-      <section style={{ padding: '2rem', maxWidth: '1100px', margin: '0 auto' }}>
-        {splitOfferings.map((item, index) => {
-          const imageBlock = (
-            <div style={{
-              background: item.bg,
-              borderRadius: '16px',
-              flex: 1,
-              minHeight: '220px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
+      {/* Split Layout — last 3 offerings */}
+      <section className="split-section">
+        {splitOfferings.map((item, index) => (
+          <div
+            key={item.id}
+            className={`split-row ${index % 2 === 0 ? 'text-first' : 'image-first'}`}
+          >
+            <div className="split-image" style={{ background: item.bg }}>
               {item.icon}
             </div>
-          );
-
-          const textBlock = (
-            <div style={{
-              flex: 1,
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              gap: '0.75rem',
-              padding: '1rem 2rem',
-            }}>
-              <h2 style={{
-                fontSize: '1.85rem',
-                fontWeight: '700',
-                color: '#1a1a1a',
-                margin: 0,
-              }}>
-                {item.title}
-              </h2>
-              <p style={{
-                fontSize: '1.2rem',
-                color: '#444',
-                margin: 0,
-                lineHeight: '1.65',
-              }}>
-                {item.description}
-              </p>
+            <div className="split-text">
+              <h2>{item.title}</h2>
+              <p>{item.description}</p>
             </div>
-          );
-
-          const isTextFirst = index % 2 === 0;
-
-          return (
-            <div key={item.id} style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '2rem',
-              marginBottom: '3rem',
-              flexDirection: isTextFirst ? 'row' : 'row-reverse',
-            }}>
-              {imageBlock}
-              {textBlock}
-            </div>
-          );
-        })}
+          </div>
+        ))}
       </section>
 
-      {/* Questions Section */}
-      <section style={{
-        background: '#f5f5f5',
-        padding: '5rem 2rem',
-        textAlign: 'center',
-        marginLeft: 'calc(-50vw + 50%)',
-        marginRight: 'calc(-50vw + 50%)',
-        width: '100vw',
-      }}>
-        <h2 style={{
-          fontSize: '4.5rem',
-          fontWeight: '700',
-          color: '#1a1a1a',
-          margin: '0 0 3rem 0',
-          lineHeight: '1.15',
-        }}>
-          Questions? We have answers
-        </h2>
-
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: '1.5rem',
-          maxWidth: '1100px',
-          margin: '0 auto',
-          textAlign: 'left',
-        }}>
+      {/* Questions */}
+      <section className="questions-section">
+        <h2>Questions? We have answers</h2>
+        <div className="questions-grid">
           {[
             {
               title: 'Click for more details',
@@ -329,40 +437,10 @@ const Home = () => {
               href: '#about',
             },
           ].map((card, i) => (
-            <div key={i} style={{
-              background: 'white',
-              borderRadius: '8px',
-              padding: '2rem',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '0.75rem',
-              boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
-            }}>
-              <h3 style={{
-                fontSize: '1.85rem',
-                fontWeight: '700',
-                color: '#1a1a1a',
-                margin: 0,
-              }}>
-                {card.title}
-              </h3>
-              <p style={{
-                fontSize: '1.2rem',
-                color: '#444',
-                margin: 0,
-                lineHeight: '1.6',
-                flexGrow: 1,
-              }}>
-                {card.description}
-              </p>
-              <a href={card.href} style={{
-                color: '#0078d4',
-                fontSize: '0.9rem',
-                textDecoration: 'none',
-                fontWeight: '500',
-              }}>
-                {card.link}
-              </a>
+            <div key={i} className="question-card">
+              <h3>{card.title}</h3>
+              <p>{card.description}</p>
+              <a href={card.href}>{card.link}</a>
             </div>
           ))}
         </div>
