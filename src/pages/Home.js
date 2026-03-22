@@ -290,7 +290,12 @@ const Home = () => {
           font-weight: 500;
         }
 
-        /* Tablet — 768px to 1024px */
+        /* Mobile content wrapper — constrains inner content to ~65% */
+        .mobile-inner {
+          width: 100%;
+        }
+
+        /* Tablet */
         @media (max-width: 1024px) {
           .hero-section h1,
           .full-width-section h2,
@@ -310,13 +315,20 @@ const Home = () => {
           }
         }
 
-        /* Mobile — up to 768px */
+        /* Mobile */
         @media (max-width: 768px) {
+
+          /* Full-bleed sections: keep bg edge-to-edge, constrain inner content */
           .hero-section,
           .full-width-section,
           .questions-section {
-            padding: 3rem 1.25rem;
+            padding: 3rem 0;
           }
+          .mobile-inner {
+            width: 65%;
+            margin: 0 auto;
+          }
+
           .hero-section h1,
           .full-width-section h2,
           .questions-section h2 {
@@ -327,14 +339,20 @@ const Home = () => {
             font-size: 1rem;
           }
 
+          /* Offerings grid */
           .offerings-grid {
             grid-template-columns: 1fr;
-            padding: 2rem 1.25rem;
+            padding: 2rem 0;
             gap: 2rem;
+            width: 65%;
+            margin: 0 auto;
           }
 
+          /* Split section */
           .split-section {
-            padding: 1.25rem;
+            padding: 1.25rem 0;
+            width: 65%;
+            margin: 0 auto;
           }
           .split-row.text-first,
           .split-row.image-first {
@@ -358,19 +376,35 @@ const Home = () => {
             font-size: 1rem;
           }
 
+          /* Questions grid */
           .questions-grid {
             grid-template-columns: 1fr;
+            width: 65%;
+            margin: 0 auto;
+            text-align: left;
           }
           .questions-section h2 {
             font-size: 1.75rem;
+          }
+        }
+
+        /* Small mobile — loosen to 75% so it doesn't get too narrow */
+        @media (max-width: 480px) {
+          .mobile-inner,
+          .offerings-grid,
+          .split-section,
+          .questions-grid {
+            width: 75%;
           }
         }
       `}</style>
 
       {/* Hero */}
       <section className="hero-section">
-        <h1>Welcome to Dynamics 365</h1>
-        <p>End to end document solutions built for your Dynamics 365 implementation.</p>
+        <div className="mobile-inner">
+          <h1>Welcome to Dynamics 365</h1>
+          <p>End to end document solutions built for your Dynamics 365 implementation.</p>
+        </div>
       </section>
 
       {/* Offerings Grid — 4 cards */}
@@ -388,11 +422,13 @@ const Home = () => {
 
       {/* Fraction of a cost */}
       <section className="full-width-section">
-        <h2>All for a fraction of a cost of standard implementation!</h2>
-        <p>
-          Get enterprise-grade Dynamics 365 documents, templates, and training resources —
-          without the enterprise price tag.
-        </p>
+        <div className="mobile-inner">
+          <h2>All for a fraction of a cost of standard implementation!</h2>
+          <p>
+            Get enterprise-grade Dynamics 365 documents, templates, and training resources —
+            without the enterprise price tag.
+          </p>
+        </div>
       </section>
 
       {/* Split Layout — last 3 offerings */}
@@ -415,7 +451,9 @@ const Home = () => {
 
       {/* Questions */}
       <section className="questions-section">
-        <h2>Questions? We have answers</h2>
+        <div className="mobile-inner">
+          <h2>Questions? We have answers</h2>
+        </div>
         <div className="questions-grid">
           {[
             {
