@@ -290,7 +290,6 @@ const Home = () => {
           font-weight: 500;
         }
 
-        /* Mobile content wrapper — constrains inner content to ~65% */
         .mobile-inner {
           width: 100%;
         }
@@ -302,9 +301,7 @@ const Home = () => {
           .questions-section h2 {
             font-size: 3rem;
           }
-          .offerings-grid {
-            gap: 2rem;
-          }
+          .offerings-grid { gap: 2rem; }
           .split-text h2,
           .offering-card h2,
           .question-card h3 {
@@ -317,8 +314,6 @@ const Home = () => {
 
         /* Mobile */
         @media (max-width: 768px) {
-
-          /* Full-bleed sections: keep bg edge-to-edge, constrain inner content */
           .hero-section,
           .full-width-section,
           .questions-section {
@@ -328,7 +323,6 @@ const Home = () => {
             width: 65%;
             margin: 0 auto;
           }
-
           .hero-section h1,
           .full-width-section h2,
           .questions-section h2 {
@@ -339,16 +333,24 @@ const Home = () => {
             font-size: 1rem;
           }
 
-          /* Offerings grid */
+          /* Hide images on mobile */
+          .offering-card-image {
+            display: none;
+          }
+          .split-image {
+            display: none;
+          }
+
+          /* Offerings grid — text only */
           .offerings-grid {
             grid-template-columns: 1fr;
             padding: 2rem 0;
-            gap: 2rem;
+            gap: 1.5rem;
             width: 65%;
             margin: 0 auto;
           }
 
-          /* Split section */
+          /* Split section — text only, full width */
           .split-section {
             padding: 1.25rem 0;
             width: 65%;
@@ -357,13 +359,11 @@ const Home = () => {
           .split-row.text-first,
           .split-row.image-first {
             flex-direction: column;
-          }
-          .split-image {
-            width: 100%;
-            min-height: 180px;
+            margin-bottom: 1.5rem;
           }
           .split-text {
-            padding: 0.5rem 0;
+            padding: 0;
+            width: 100%;
           }
           .split-text h2,
           .offering-card h2,
@@ -388,7 +388,7 @@ const Home = () => {
           }
         }
 
-        /* Small mobile — loosen to 75% so it doesn't get too narrow */
+        /* Small mobile */
         @media (max-width: 480px) {
           .mobile-inner,
           .offerings-grid,

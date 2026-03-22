@@ -13,11 +13,14 @@ const Footer = () => {
         .footer-bar {
           display: flex;
           align-items: center;
-          justify-content: space-between;
+          justify-content: center;
           max-width: 1200px;
           margin: 0 auto;
           flex-wrap: wrap;
           gap: 0.75rem;
+        }
+        .footer-right {
+          justify-content: center;
         }
         .footer-left {
           display: flex;
