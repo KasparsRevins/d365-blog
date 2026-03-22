@@ -28,8 +28,22 @@ const ContactUs = () => {
         .feature-card h3 { margin: 0 0 0.6rem; font-size: 1.05rem; }
         .feature-card p { margin: 0; color: #444; }
 
-        .contact-panel { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; margin-top: 2rem; max-width: 920px; margin-left: auto; margin-right: auto; }
-        .contact-panel .details,.contact-panel .form-wrap { background: white; border: 1px solid #e8ebee; border-radius: 12px; padding: 1.25rem; box-shadow: 0 3px 10px rgba(57,96,128,0.08); }
+        .contact-panel {
+          display: flex;
+          justify-content: center;
+          align-items: flex-start;
+          margin: 2rem auto 0;
+          width: min(560px, 100%);
+          padding: 0 0.5rem;
+        }
+        .contact-panel .form-wrap {
+          width: 100%;
+          background: white;
+          border: 1px solid #e8ebee;
+          border-radius: 12px;
+          padding: 1.25rem;
+          box-shadow: 0 3px 10px rgba(57,96,128,0.08);
+        }
         .contact-panel h2 { margin-top: 0; }
 
         .contact-form-group { display: flex; flex-direction: column; gap: 0.75rem; }
@@ -37,7 +51,11 @@ const ContactUs = () => {
         .contact-form-group textarea { resize: vertical; min-height: 120px; }
         .contact-form-submit { background: #0078d4; color: white; border: none; padding: 0.75rem 1rem; border-radius: 8px; cursor: pointer; font-weight: 600; }
 
-        @media (max-width: 980px) { .features-grid { grid-template-columns: 1fr; } .contact-panel { grid-template-columns: 1fr; } }
+        @media (max-width: 980px) {
+          .features-grid { grid-template-columns: 1fr; }
+          .contact-panel { width: 100%; }
+          .contact-panel .form-wrap { max-width: 100%; }
+        }
       `}</style>
 
       <main className="contact-hero">
@@ -46,15 +64,6 @@ const ContactUs = () => {
       </main>
 
       <section className="contact-panel">
-        <div className="details">
-          <h2>Contact Details</h2>
-          <p>Reach us anytime for a demo, implementation assistance, or any question about Dynamics 365 output solutions.</p>
-          <ul style={{ paddingLeft: '1rem', marginTop: '0.8rem', color: '#444' }}>
-            <li>Phone: +1 800 555 1234</li>
-            <li>Email: support@d365insights.example</li>
-            <li>Address: 123 Dynamics Way, Cloud City, WA</li>
-          </ul>
-        </div>
 
         <div className="form-wrap">
           <h2>Send us a message</h2>
