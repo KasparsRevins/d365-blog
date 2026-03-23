@@ -18,50 +18,209 @@ const ContactUs = () => {
   return (
     <div className="contact-us" style={{ padding: '2rem 1rem' }}>
       <style>{`
-        .contact-hero { text-align: center; max-width: 920px; margin: 0 auto 2rem; }
-        .contact-hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 0.6rem; }
-        .contact-hero p { font-size: 1.2rem; color: #555; margin-bottom: 2rem; }
+         /* ── Hero ── */
+        .contact-hero {
+          background: #f5f5f5;
+          padding: 5rem 2rem;
+          text-align: center;
+          margin-left: calc(-50vw + 50%);
+          margin-right: calc(-50vw + 50%);
+          width: 100vw;
+        }
+        .contact-hero h1 {
+          font-size: 4.5rem;
+          font-weight: 700;
+          color: #1a1a1a;
+          margin: 0 0 1.5rem 0;
+          line-height: 1.15;
+        }
+        .contact-hero p {
+          font-size: 1.4rem;
+          color: #444;
+          max-width: 640px;
+          margin: 0 auto;
+          line-height: 1.65;
+        }
 
-        .features-grid { display: grid; gap: 1rem; grid-template-columns: repeat(2, minmax(0,1fr)); margin-bottom: 2rem; }
-        .feature-card { background: #f3f9ff; border: 1px solid #e3f1ff; border-radius: 16px; padding: 1.5rem; box-shadow: 0 8px 20px rgba(6,55,136,0.08); }
-        .feature-card .icon { width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(135deg,#0078d4,#50a7ff); color: white; font-size: 1.2rem; margin-bottom: 0.9rem; }
-        .feature-card h3 { margin: 0 0 0.6rem; font-size: 1.05rem; }
-        .feature-card p { margin: 0; color: #444; }
+        /* ── Form section ── */
+        .contact-body {
+          max-width: 1100px;
+          margin: 0 auto;
+          padding: 4rem 2rem;
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 4rem;
+          align-items: start;
+        }
 
+        /* ── Left: info ── */
+        .contact-info h2 {
+          font-size: 2rem;
+          font-weight: 700;
+          color: #1a1a1a;
+          margin: 0 0 1rem 0;
+        }
+        .contact-info p {
+          font-size: 1.05rem;
+          color: #444;
+          line-height: 1.7;
+          margin-bottom: 2rem;
+        }
+        .contact-details {
+          display: flex;
+          flex-direction: column;
+          gap: 1.25rem;
+        }
+        .contact-detail-item {
+          display: flex;
+          align-items: flex-start;
+          gap: 1rem;
+          background: white;
+          border: 1px solid #e0e0e0;
+          border-radius: 10px;
+          padding: 1.1rem 1.25rem;
+        }
+        .contact-detail-icon {
+          font-size: 1.4rem;
+          flex-shrink: 0;
+          width: 40px;
+          height: 40px;
+          background: #f0f7ff;
+          border-radius: 8px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .contact-detail-item h4 {
+          font-size: 0.9rem;
+          font-weight: 600;
+          color: #1a1a1a;
+          margin: 0 0 0.2rem 0;
+        }
+        .contact-detail-item p {
+          font-size: 0.9rem;
+          color: #555;
+          margin: 0;
+          line-height: 1.4;
+        }
+        .contact-detail-item a {
+          font-size: 0.9rem;
+          color: #0078d4;
+          text-decoration: none;
+        }
+        .contact-detail-item a:hover {
+          text-decoration: underline;
+        }
+
+        /* ── Centered contact panel ── */
         .contact-panel {
           display: flex;
           justify-content: center;
-          align-items: flex-start;
-          margin: 2rem auto 0;
-          width: min(560px, 100%);
-          padding: 0 0.5rem;
         }
-        .contact-panel .form-wrap {
-          width: 100%;
+        .form-wrap {
+          width: 50%;
+          max-width: 560px;
+          min-width: 320px;
           background: white;
-          border: 1px solid #e8ebee;
+          border: 1px solid #e0e0e0;
           border-radius: 12px;
-          padding: 1.25rem;
-          box-shadow: 0 3px 10px rgba(57,96,128,0.08);
+          padding: 2.5rem;
+          margin: 0 auto;
+          box-sizing: border-box;
         }
-        .contact-panel h2 { margin-top: 0; }
+        .form-wrap h2 {
+          font-size: 1.5rem;
+          font-weight: 700;
+          color: #1a1a1a;
+          margin: 0 0 1.75rem 0;
+        }
+        .contact-form-group {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+        }
+        .contact-form-group input,
+        .contact-form-group textarea {
+          width: 100%;
+          padding: 0.75rem 1rem;
+          border: 1px solid #ddd;
+          border-radius: 6px;
+          font-size: 0.95rem;
+          box-sizing: border-box;
+          transition: border-color 0.2s;
+          outline: none;
+        }
+        .contact-form-group input:focus,
+        .contact-form-group textarea:focus {
+          border-color: #0078d4;
+        }
+        .contact-form-group textarea {
+          resize: vertical;
+          min-height: 130px;
+        }
+        .contact-form-submit {
+          background: #0078d4;
+          color: white;
+          border: none;
+          padding: 0.85rem 1rem;
+          border-radius: 6px;
+          cursor: pointer;
+          font-weight: 600;
+          font-size: 1rem;
+          transition: background 0.2s;
+        }
+        .contact-form-submit:hover {
+          background: #006cbf;
+        }
+        .form-success {
+          color: #107c10;
+          font-weight: 600;
+          font-size: 1rem;
+          padding: 1rem;
+          background: #f0fff0;
+          border: 1px solid #c3e6cb;
+          border-radius: 6px;
+        }
+        .form-disclaimer {
+          font-size: 0.8rem;
+          color: #888;
+          text-align: center;
+          margin-top: 0.5rem;
+        }
 
-        .contact-form-group { display: flex; flex-direction: column; gap: 0.75rem; }
-        .contact-form-group input,.contact-form-group textarea { width: 100%; padding: 0.75rem 0.85rem; border: 1px solid #cbd5dd; border-radius: 8px; outline: none; }
-        .contact-form-group textarea { resize: vertical; min-height: 120px; }
-        .contact-form-submit { background: #0078d4; color: white; border: none; padding: 0.75rem 1rem; border-radius: 8px; cursor: pointer; font-weight: 600; }
+        /* ── Tablet ── */
+        @media (max-width: 1024px) {
+          .contact-hero h1 { font-size: 3rem; }
+          .contact-hero p  { font-size: 1.2rem; }
+          .contact-body    { gap: 2.5rem; }
+        }
 
-        @media (max-width: 980px) {
-          .features-grid { grid-template-columns: 1fr; }
-          .contact-panel { width: 100%; }
-          .contact-panel .form-wrap { max-width: 100%; }
+        /* ── Mobile ── */
+        @media (max-width: 768px) {
+          .contact-hero {
+            padding: 3rem 0;
+          }
+          .contact-hero h1 { font-size: 2rem; }
+          .contact-hero p  { font-size: 1rem; width: 65%; margin: 0 auto; }
+
+          .contact-body {
+            grid-template-columns: 1fr;
+            padding: 2.5rem 1.25rem;
+            gap: 2rem;
+          }
+          .contact-info h2 { font-size: 1.5rem; }
+          .contact-form-card { padding: 1.5rem; }
+        }
+
+        @media (max-width: 480px) {
+          .contact-hero p { width: 75%; }
         }
       `}</style>
 
-      <main className="contact-hero">
-        <h1>Welcome to Dynamics 365</h1>
-        <p>End to end document solutions built for your Dynamics 365 implementation.</p>
-      </main>
+      <section className="contact-hero">
+        <h1>Contact Us</h1>
+        <p>Have a question or ready to start a project? We'd love to hear from you.</p>
+      </section>
 
       <section className="contact-panel">
 
