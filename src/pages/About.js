@@ -1,589 +1,487 @@
-import React, { useState } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import axios from 'axios';
 
 const About = () => {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    company: "",
-    email: "",
-    phone: "",
-    service: "",
-    message: "",
-    projectType: ""
-  });
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-
   const services = [
-    {
-      id: 1,
-      title: "Dynamics 365 Implementation",
-      icon: "🚀",
-      description: "End-to-end implementation of Dynamics 365 modules"
-    },
-    {
-      id: 2,
-      title: "Custom Development",
-      icon: "⚙️",
-      description: "Custom solutions using Power Platform and Azure"
-    },
-    {
-      id: 3,
-      title: "Migration Services",
-      icon: "🔄",
-      description: "Migrate from legacy systems to Dynamics 365"
-    },
-    {
-      id: 4,
-      title: "Training & Support",
-      icon: "🎓",
-      description: "User training and ongoing support packages"
-    }
+    { id: 1, title: "Document Solutions", icon: "📄", description: "End-to-end output document solutions for every stage of your workflow." },
+    { id: 2, title: "System Capabilities", icon: "⚙️", description: "Detailed documentation of your Dynamics 365 system capabilities." },
+    { id: 3, title: "Configuration Packages", icon: "📦", description: "Ready-made configuration bundles to accelerate your deployment." },
+    { id: 4, title: "Training & Videos", icon: "🎬", description: "Step-by-step training documentation and onboarding video guides." }
   ];
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const validateForm = () => {
-    let errors = [];
-
-    if (!formData.firstName.trim()) {
-      errors.push("First name is required.");
-    }
-    if (!formData.lastName.trim()) {
-      errors.push("Last name is required.");
-    }
-    if (!formData.email.trim()) {
-      errors.push("Email is required.");
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      errors.push("Invalid email format.");
-    }
-    if (!formData.company.trim()) {
-      errors.push("Company name is required.");
-    }
-    if (!formData.message.trim()) {
-      errors.push("Project description is required.");
-    }
-    
-    return errors;
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    const errors = validateForm();
-    if (errors.length > 0) {
-      toast.error(errors[0]);
-      setIsSubmitting(false);
-      return;
-    }
-
-    try {
-      // In production, replace with your actual API endpoint
-      // const response = await axios.post('YOUR_API_ENDPOINT', formData);
-      
-      // For demo purposes, simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      toast.success("Thank you! We've received your inquiry and will contact you within 24 hours.");
-      
-      // Reset form
-      setFormData({
-        firstName: "",
-        lastName: "",
-        company: "",
-        email: "",
-        phone: "",
-        service: "",
-        message: "",
-        projectType: ""
-      });
-    } catch (error) {
-      toast.error("Something went wrong. Please try again or contact us directly.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  const stats = [
+    { value: "50+", label: "Clients Served" },
+    { value: "200+", label: "Documents Delivered" },
+    { value: "98%", label: "Client Satisfaction" },
+    { value: "10+", label: "Years Experience" }
+  ];
 
   return (
     <div className="about">
-      <ToastContainer 
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
+      <style>{`
+        /* ── Hero ── */
+        .about-hero {
+          background: #f5f5f5;
+          padding: 5rem 2rem;
+          text-align: center;
+          margin-left: calc(-50vw + 50%);
+          margin-right: calc(-50vw + 50%);
+          width: 100vw;
+        }
+        .about-hero h1 {
+          font-size: 4.5rem;
+          font-weight: 700;
+          color: #1a1a1a;
+          margin: 0 0 1.5rem 0;
+          line-height: 1.15;
+        }
+        .about-hero p {
+          font-size: 1.4rem;
+          color: #444;
+          max-width: 680px;
+          margin: 0 auto;
+          line-height: 1.65;
+        }
 
-      <section className="hero">
-        <h1>About Dynamics 365 Insights</h1>
+        /* ── Stats bar ── */
+        .stats-bar {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 0;
+          max-width: 1100px;
+          margin: 3rem auto;
+          border: 1px solid #e0e0e0;
+          border-radius: 12px;
+          overflow: hidden;
+          background: white;
+        }
+        .stat-item {
+          padding: 2rem;
+          text-align: center;
+          border-right: 1px solid #e0e0e0;
+        }
+        .stat-item:last-child { border-right: none; }
+        .stat-value {
+          font-size: 2.5rem;
+          font-weight: 700;
+          color: #0078d4;
+          display: block;
+        }
+        .stat-label {
+          font-size: 0.9rem;
+          color: #666;
+          margin-top: 0.25rem;
+        }
+
+        /* ── Content wrapper ── */
+        .about-content {
+          max-width: 1100px;
+          margin: 0 auto;
+          padding: 0 2rem;
+        }
+
+        /* ── Mission section ── */
+        .mission-section {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 4rem;
+          align-items: center;
+          padding: 4rem 0;
+          border-bottom: 1px solid #e0e0e0;
+        }
+        .mission-text h2 {
+          font-size: 2.5rem;
+          font-weight: 700;
+          color: #1a1a1a;
+          margin: 0 0 1rem 0;
+          line-height: 1.2;
+        }
+        .mission-text p {
+          font-size: 1.1rem;
+          color: #444;
+          line-height: 1.7;
+          margin-bottom: 1rem;
+        }
+        .mission-image {
+          background: linear-gradient(135deg, #e8f4fd 0%, #c9e4f5 100%);
+          border-radius: 16px;
+          height: 320px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 5rem;
+        }
+
+        /* ── Services grid ── */
+        .services-section {
+          padding: 4rem 0;
+          border-bottom: 1px solid #e0e0e0;
+        }
+        .services-section h2 {
+          font-size: 2.5rem;
+          font-weight: 700;
+          color: #1a1a1a;
+          margin: 0 0 0.75rem 0;
+        }
+        .services-section > p {
+          font-size: 1.1rem;
+          color: #444;
+          margin: 0 0 2.5rem 0;
+        }
+        .services-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1.5rem;
+        }
+        .service-card {
+          background: white;
+          border: 1px solid #e0e0e0;
+          border-radius: 12px;
+          padding: 1.75rem;
+          display: flex;
+          gap: 1.25rem;
+          align-items: flex-start;
+          transition: box-shadow 0.2s;
+        }
+        .service-card:hover {
+          box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+        }
+        .service-icon {
+          font-size: 2rem;
+          flex-shrink: 0;
+          width: 52px;
+          height: 52px;
+          background: #f0f7ff;
+          border-radius: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .service-card h4 {
+          font-size: 1.1rem;
+          font-weight: 600;
+          color: #1a1a1a;
+          margin: 0 0 0.4rem 0;
+        }
+        .service-card p {
+          font-size: 0.95rem;
+          color: #555;
+          margin: 0;
+          line-height: 1.5;
+        }
+
+        /* ── Full-width callout ── */
+        .callout-section {
+          background: #f5f5f5;
+          padding: 5rem 2rem;
+          text-align: center;
+          margin-left: calc(-50vw + 50%);
+          margin-right: calc(-50vw + 50%);
+          width: 100vw;
+        }
+        .callout-section h2 {
+          font-size: 3rem;
+          font-weight: 700;
+          color: #1a1a1a;
+          margin: 0 0 1rem 0;
+        }
+        .callout-section p {
+          font-size: 1.2rem;
+          color: #444;
+          max-width: 600px;
+          margin: 0 auto;
+          line-height: 1.65;
+        }
+
+        /* ── Contact form ── */
+        .contact-section {
+          padding: 4rem 0;
+        }
+        .contact-section h2 {
+          font-size: 2.5rem;
+          font-weight: 700;
+          color: #1a1a1a;
+          margin: 0 0 0.75rem 0;
+        }
+        .contact-section > p {
+          font-size: 1.1rem;
+          color: #444;
+          margin: 0 0 2.5rem 0;
+        }
+        .form-card {
+          background: white;
+          border: 1px solid #e0e0e0;
+          border-radius: 12px;
+          padding: 2.5rem;
+        }
+        .form-row {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1rem;
+          margin-bottom: 1.5rem;
+        }
+        .form-group {
+          margin-bottom: 1.5rem;
+        }
+        .form-group label {
+          display: block;
+          margin-bottom: 0.5rem;
+          font-weight: 600;
+          font-size: 0.9rem;
+          color: #1a1a1a;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+          width: 100%;
+          padding: 0.75rem;
+          border: 1px solid #ddd;
+          border-radius: 6px;
+          font-size: 0.95rem;
+          background: white;
+          box-sizing: border-box;
+          transition: border-color 0.2s;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+          outline: none;
+          border-color: #0078d4;
+        }
+        .radio-group {
+          display: flex;
+          gap: 1.5rem;
+          flex-wrap: wrap;
+        }
+        .radio-group label {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          font-weight: 400;
+          cursor: pointer;
+        }
+        .submit-btn {
+          width: 100%;
+          padding: 0.9rem;
+          background: #0078d4;
+          color: white;
+          border: none;
+          border-radius: 6px;
+          font-size: 1rem;
+          font-weight: 600;
+          cursor: pointer;
+          transition: background 0.2s;
+        }
+        .submit-btn:hover:not(:disabled) { background: #006cbf; }
+        .submit-btn:disabled { opacity: 0.7; cursor: not-allowed; }
+        .form-disclaimer {
+          margin-top: 1rem;
+          font-size: 0.82rem;
+          color: #888;
+          text-align: center;
+        }
+
+        /* ── Connect cards ── */
+        .connect-section {
+          padding: 4rem 0 2rem;
+        }
+        .connect-section h2 {
+          font-size: 2.5rem;
+          font-weight: 700;
+          color: #1a1a1a;
+          margin: 0 0 0.75rem 0;
+          text-align: center;
+        }
+        .connect-section > p {
+          font-size: 1.1rem;
+          color: #444;
+          text-align: center;
+          margin: 0 0 2.5rem 0;
+        }
+        .connect-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 1.5rem;
+        }
+        .connect-card {
+          background: white;
+          border: 1px solid #e0e0e0;
+          border-radius: 12px;
+          padding: 2rem;
+          text-align: center;
+          transition: box-shadow 0.2s;
+        }
+        .connect-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+        .connect-card .icon { font-size: 2.25rem; margin-bottom: 0.75rem; }
+        .connect-card h4 { font-size: 1.05rem; font-weight: 600; margin: 0 0 0.5rem 0; color: #1a1a1a; }
+        .connect-card a { color: #0078d4; text-decoration: none; font-size: 0.9rem; }
+        .connect-card a:hover { text-decoration: underline; }
+        .connect-card p { color: #555; font-size: 0.9rem; margin: 0; line-height: 1.5; }
+
+        /* ── Tablet ── */
+        @media (max-width: 1024px) {
+          .about-hero h1 { font-size: 3rem; }
+          .about-hero p { font-size: 1.2rem; }
+          .mission-text h2,
+          .services-section h2,
+          .contact-section h2,
+          .connect-section h2 { font-size: 2rem; }
+          .callout-section h2 { font-size: 2.5rem; }
+          .stat-value { font-size: 2rem; }
+        }
+
+        /* ── Mobile ── */
+        @media (max-width: 768px) {
+          .about-hero { padding: 3rem 0; }
+          .about-hero h1 { font-size: 2rem; }
+          .about-hero p { font-size: 1rem; width: 65%; margin: 0 auto; }
+
+          .stats-bar {
+            grid-template-columns: repeat(2, 1fr);
+            margin: 2rem 1.25rem;
+          }
+          .stat-item:nth-child(2) { border-right: none; }
+          .stat-item:nth-child(3),
+          .stat-item:nth-child(4) { border-top: 1px solid #e0e0e0; }
+          .stat-item:nth-child(4) { border-right: none; }
+
+          .about-content { padding: 0 1.25rem; }
+
+          .mission-section {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            padding: 2.5rem 0;
+          }
+          .mission-image { display: none; }
+          .mission-text h2 { font-size: 1.5rem; }
+
+          .services-section { padding: 2.5rem 0; }
+          .services-section h2 { font-size: 1.5rem; }
+          .services-grid { grid-template-columns: 1fr; }
+
+          .callout-section {
+            padding: 3rem 0;
+          }
+          .callout-section h2 { font-size: 1.75rem; }
+          .callout-section p { font-size: 1rem; width: 65%; }
+
+          .contact-section { padding: 2.5rem 0; }
+          .contact-section h2 { font-size: 1.5rem; }
+          .form-card { padding: 1.5rem; }
+          .form-row { grid-template-columns: 1fr; }
+
+          .radio-group { flex-direction: column; gap: 0.75rem; }
+
+          .connect-section { padding: 2.5rem 0 1.5rem; }
+          .connect-section h2 { font-size: 1.5rem; }
+          .connect-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 480px) {
+          .about-hero p,
+          .callout-section p { width: 75%; }
+          .stats-bar { margin: 2rem 0; border-radius: 0; border-left: none; border-right: none; }
+        }
+      `}</style>
+
+      <ToastContainer position="top-right" autoClose={5000} />
+
+      {/* Hero */}
+      <section className="about-hero">
+        <h1>About Us</h1>
         <p>
-          We are a team of Microsoft-certified experts dedicated to helping organizations 
-          maximize their investment in Dynamics 365. Our mission is to provide authoritative, 
-          practical guidance for businesses navigating digital transformation.
+          Microsoft-certified experts helping organisations maximise their
+          Dynamics 365 investment — from implementation to ongoing optimisation.
         </p>
       </section>
 
-      {/* Work with Me Section */}
-      <div className="about-section" style={{borderLeft: '4px solid var(--ms-blue)'}}>
-        <div style={{display: 'flex', alignItems: 'flex-start', gap: '1.5rem', marginBottom: '2rem'}}>
-          <div style={{
-            background: 'var(--ms-blue)', 
-            color: 'white', 
-            padding: '1rem', 
-            borderRadius: '8px',
-            fontSize: '1.5rem'
-          }}>
-            👋
+      {/* Stats */}
+      <div className="stats-bar">
+        {stats.map((s, i) => (
+          <div key={i} className="stat-item">
+            <span className="stat-value">{s.value}</span>
+            <span className="stat-label">{s.label}</span>
           </div>
-          <div>
-            <h2>Work With Me</h2>
-            <p style={{color: 'var(--ms-gray-70)'}}>
-              Hi, I'm Lead Solutions Architect. I help businesses build and improve 
-              their Dynamics 365 systems - from implementation to optimization, integrations, and legacy upgrades.
+        ))}
+      </div>
+
+      <div className="about-content">
+
+        {/* Mission */}
+        <div className="mission-section">
+          <div className="mission-text">
+            <h2>Our Mission</h2>
+            <p>
+              We exist to make enterprise-grade Dynamics 365 document solutions accessible
+              to every organisation — without the enterprise price tag or complexity.
             </p>
-            <p style={{color: 'var(--ms-gray-70)', marginTop: '0.5rem'}}>
-              I'm currently available for consulting, freelance work, and long-term partnerships.
+            <p>
+              From system capability documentation to fully branded email templates and
+              data migration strategies, we deliver the artefacts your team needs to
+              deploy confidently and operate efficiently.
             </p>
-            <div style={{display: 'flex', gap: '1rem', marginTop: '1.5rem'}}>
-              <button 
-                className="cta-button"
-                onClick={() => document.getElementById('contact-form').scrollIntoView({ behavior: 'smooth' })}
-              >
-                Start a Project
-              </button>
-              <a 
-                href="mailto:sarah@dynamics365insights.com" 
-                className="cta-button secondary"
-              >
-                Email Me
+            <p>
+              As a Microsoft Gold Partner, we have direct access to engineering teams,
+              early previews, and specialised training to ensure our deliverables always
+              reflect best practice.
+            </p>
+          </div>
+          <div className="mission-image">🏢</div>
+        </div>
+
+        {/* Services */}
+        <div className="services-section">
+          <h2>What We Deliver</h2>
+          <p>Every engagement is scoped, priced, and delivered to a fixed standard.</p>
+          <div className="services-grid">
+            {services.map(s => (
+              <div key={s.id} className="service-card">
+                <div className="service-icon">{s.icon}</div>
+                <div>
+                  <h4>{s.title}</h4>
+                  <p>{s.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Connect */}
+        <div className="connect-section">
+          <h2>Other Ways to Connect</h2>
+          <p>Prefer a different channel? We're easy to reach.</p>
+          <div className="connect-grid">
+            <div className="connect-card">
+              <div className="icon">📧</div>
+              <h4>Email Us</h4>
+              <a href="mailto:contact@dynamics365insights.com">contact@dynamics365insights.com</a>
+            </div>
+            <div className="connect-card">
+              <div className="icon">📞</div>
+              <h4>Call Us</h4>
+              <p>+1 (555) 123-4567<br />Mon–Fri, 9AM–6PM EST</p>
+            </div>
+            <div className="connect-card">
+              <div className="icon">💼</div>
+              <h4>LinkedIn</h4>
+              <a href="https://linkedin.com/company/dynamics365insights" target="_blank" rel="noopener noreferrer">
+                Connect on LinkedIn
               </a>
             </div>
           </div>
         </div>
+
       </div>
 
-      {/* Microsoft Partnership Section */}
-      <div className="about-section">
-        <div style={{display: 'flex', alignItems: 'center', gap: '1.5rem', marginBottom: '2rem'}}>
-          <div style={{background: 'var(--ms-blue)', color: 'white', padding: '0.75rem', borderRadius: '6px'}}>
-            <span style={{fontSize: '1.5rem'}}>🏢</span>
-          </div>
-          <div>
-            <h2>Microsoft Gold Partner</h2>
-            <p style={{color: 'var(--ms-gray-70)'}}>
-              As a Microsoft Gold Partner, we have direct access to engineering teams, 
-              early previews, and specialized training to deliver exceptional solutions.
-            </p>
-          </div>
-        </div>
-        
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-          gap: '1.5rem',
-          marginTop: '2rem'
-        }}>
-          {services.map(service => (
-            <div key={service.id} style={{
-              background: 'white',
-              border: '1px solid var(--ms-gray-30)',
-              borderRadius: '6px',
-              padding: '1.5rem',
-              textAlign: 'center'
-            }}>
-              <div style={{fontSize: '2rem', marginBottom: '1rem'}}>{service.icon}</div>
-              <h4>{service.title}</h4>
-              <p style={{color: 'var(--ms-gray-70)', fontSize: '0.95rem'}}>{service.description}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Contact Form Section */}
-      <div id="contact-form" className="about-section">
-        <h2>Start Your Dynamics 365 Project</h2>
-        <p style={{color: 'var(--ms-gray-70)', marginBottom: '2rem'}}>
-          Tell us about your project and we'll get back to you within 24 hours.
+      {/* Bottom callout */}
+      <section className="callout-section" style={{ marginTop: '3rem' }}>
+        <h2>All for a fraction of a standard implementation cost</h2>
+        <p>
+          Enterprise-grade Dynamics 365 documents, templates, and training resources —
+          without the enterprise price tag.
         </p>
-        
-        <div style={{
-          background: 'white',
-          border: '1px solid var(--ms-gray-30)',
-          borderRadius: '8px',
-          padding: '2rem'
-        }}>
-          <form onSubmit={handleSubmit}>
-            <div style={{marginBottom: '1.5rem'}}>
-              <label style={{
-                display: 'block',
-                marginBottom: '0.5rem',
-                fontWeight: '600',
-                color: 'var(--ms-gray-90)'
-              }}>
-                Name *
-              </label>
-              <div style={{display: 'flex', gap: '1rem'}}>
-                <input
-                  type="text"
-                  name="firstName"
-                  value={formData.firstName}
-                  onChange={handleChange}
-                  placeholder="First Name"
-                  required
-                  style={{
-                    flex: 1,
-                    padding: '0.75rem',
-                    border: '1px solid var(--ms-gray-30)',
-                    borderRadius: '4px',
-                    fontSize: '0.95rem'
-                  }}
-                />
-                <input
-                  type="text"
-                  name="lastName"
-                  value={formData.lastName}
-                  onChange={handleChange}
-                  placeholder="Last Name"
-                  required
-                  style={{
-                    flex: 1,
-                    padding: '0.75rem',
-                    border: '1px solid var(--ms-gray-30)',
-                    borderRadius: '4px',
-                    fontSize: '0.95rem'
-                  }}
-                />
-              </div>
-            </div>
+      </section>
 
-            <div style={{marginBottom: '1.5rem'}}>
-              <label style={{
-                display: 'block',
-                marginBottom: '0.5rem',
-                fontWeight: '600',
-                color: 'var(--ms-gray-90)'
-              }}>
-                Company *
-              </label>
-              <input
-                type="text"
-                name="company"
-                value={formData.company}
-                onChange={handleChange}
-                placeholder="Your Company"
-                required
-                style={{
-                  width: '100%',
-                  padding: '0.75rem',
-                  border: '1px solid var(--ms-gray-30)',
-                  borderRadius: '4px',
-                  fontSize: '0.95rem'
-                }}
-              />
-            </div>
-
-            <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1.5rem'}}>
-              <div>
-                <label style={{
-                  display: 'block',
-                  marginBottom: '0.5rem',
-                  fontWeight: '600',
-                  color: 'var(--ms-gray-90)'
-                }}>
-                  Email *
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="your.email@company.com"
-                  required
-                  style={{
-                    width: '100%',
-                    padding: '0.75rem',
-                    border: '1px solid var(--ms-gray-30)',
-                    borderRadius: '4px',
-                    fontSize: '0.95rem'
-                  }}
-                />
-              </div>
-              <div>
-                <label style={{
-                  display: 'block',
-                  marginBottom: '0.5rem',
-                  fontWeight: '600',
-                  color: 'var(--ms-gray-90)'
-                }}>
-                  Phone
-                </label>
-                <input
-                  type="tel"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  placeholder="(123) 456-7890"
-                  style={{
-                    width: '100%',
-                    padding: '0.75rem',
-                    border: '1px solid var(--ms-gray-30)',
-                    borderRadius: '4px',
-                    fontSize: '0.95rem'
-                  }}
-                />
-              </div>
-            </div>
-
-            <div style={{marginBottom: '1.5rem'}}>
-              <label style={{
-                display: 'block',
-                marginBottom: '0.5rem',
-                fontWeight: '600',
-                color: 'var(--ms-gray-90)'
-              }}>
-                Service Needed *
-              </label>
-              <select
-                name="service"
-                value={formData.service}
-                onChange={handleChange}
-                required
-                style={{
-                  width: '100%',
-                  padding: '0.75rem',
-                  border: '1px solid var(--ms-gray-30)',
-                  borderRadius: '4px',
-                  fontSize: '0.95rem',
-                  background: 'white'
-                }}
-              >
-                <option value="">Select a service</option>
-                <option value="implementation">Dynamics 365 Implementation</option>
-                <option value="customization">Custom Development</option>
-                <option value="migration">System Migration</option>
-                <option value="integration">API Integration</option>
-                <option value="training">Training & Support</option>
-                <option value="consulting">Strategy Consulting</option>
-              </select>
-            </div>
-
-            <div style={{marginBottom: '1.5rem'}}>
-              <label style={{
-                display: 'block',
-                marginBottom: '0.5rem',
-                fontWeight: '600',
-                color: 'var(--ms-gray-90)'
-              }}>
-                Project Type
-              </label>
-              <div style={{display: 'flex', gap: '2rem'}}>
-                <label style={{display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
-                  <input
-                    type="radio"
-                    name="projectType"
-                    value="new"
-                    checked={formData.projectType === "new"}
-                    onChange={handleChange}
-                  />
-                  <span>New Implementation</span>
-                </label>
-                <label style={{display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
-                  <input
-                    type="radio"
-                    name="projectType"
-                    value="upgrade"
-                    checked={formData.projectType === "upgrade"}
-                    onChange={handleChange}
-                  />
-                  <span>Upgrade/Optimization</span>
-                </label>
-                <label style={{display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
-                  <input
-                    type="radio"
-                    name="projectType"
-                    value="support"
-                    checked={formData.projectType === "support"}
-                    onChange={handleChange}
-                  />
-                  <span>Ongoing Support</span>
-                </label>
-              </div>
-            </div>
-
-            <div style={{marginBottom: '2rem'}}>
-              <label style={{
-                display: 'block',
-                marginBottom: '0.5rem',
-                fontWeight: '600',
-                color: 'var(--ms-gray-90)'
-              }}>
-                Project Description *
-              </label>
-              <textarea
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                placeholder="Tell us about your project goals, timeline, and budget..."
-                required
-                rows={4}
-                style={{
-                  width: '100%',
-                  padding: '0.75rem',
-                  border: '1px solid var(--ms-gray-30)',
-                  borderRadius: '4px',
-                  fontSize: '0.95rem',
-                  resize: 'vertical'
-                }}
-              />
-            </div>
-
-            <button 
-              type="submit" 
-              className="cta-button"
-              disabled={isSubmitting}
-              style={{width: '100%', opacity: isSubmitting ? 0.7 : 1}}
-            >
-              {isSubmitting ? 'Sending...' : 'Submit Project Inquiry'}
-            </button>
-            
-            <p style={{
-              marginTop: '1rem',
-              fontSize: '0.875rem',
-              color: 'var(--ms-gray-60)',
-              textAlign: 'center'
-            }}>
-              We respect your privacy. Your information will only be used to contact you about your project.
-            </p>
-          </form>
-        </div>
-      </div>
-
-      {/* Get in Touch - Alternative Methods */}
-      <div className="about-section" style={{textAlign: 'center'}}>
-        <h2>Other Ways to Connect</h2>
-        <p style={{color: 'var(--ms-gray-70)', maxWidth: '800px', margin: '0 auto 2rem'}}>
-          Prefer to connect differently? Here are other ways to reach our team.
-        </p>
-        
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-          gap: '1.5rem',
-          marginTop: '2rem'
-        }}>
-          <div style={{
-            background: 'white',
-            border: '1px solid var(--ms-gray-30)',
-            borderRadius: '6px',
-            padding: '1.5rem'
-          }}>
-            <div style={{fontSize: '2rem', marginBottom: '1rem'}}>📧</div>
-            <h4>Email Us</h4>
-            <a 
-              href="mailto:contact@dynamics365insights.com" 
-              style={{color: 'var(--ms-blue)', textDecoration: 'none'}}
-            >
-              contact@dynamics365insights.com
-            </a>
-          </div>
-          
-          <div style={{
-            background: 'white',
-            border: '1px solid var(--ms-gray-30)',
-            borderRadius: '6px',
-            padding: '1.5rem'
-          }}>
-            <div style={{fontSize: '2rem', marginBottom: '1rem'}}>📞</div>
-            <h4>Call Us</h4>
-            <p style={{color: 'var(--ms-gray-70)'}}>
-              +1 (555) 123-4567<br/>
-              Mon-Fri, 9AM-6PM EST
-            </p>
-          </div>
-          
-          <div style={{
-            background: 'white',
-            border: '1px solid var(--ms-gray-30)',
-            borderRadius: '6px',
-            padding: '1.5rem'
-          }}>
-            <div style={{fontSize: '2rem', marginBottom: '1rem'}}>💼</div>
-            <h4>LinkedIn</h4>
-            <a 
-              href="https://linkedin.com/company/dynamics365insights" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              style={{color: 'var(--ms-blue)', textDecoration: 'none'}}
-            >
-              Connect on LinkedIn
-            </a>
-          </div>
-        </div>
-      </div>
-
-      {/* Microsoft Resources */}
-      <div style={{
-        background: 'linear-gradient(135deg, rgba(0, 120, 212, 0.1) 0%, rgba(243, 242, 241, 0.9) 100%)',
-        border: '1px solid var(--ms-gray-30)',
-        color: 'var(--ms-gray-90)',
-        padding: '2rem',
-        borderRadius: '8px',
-        marginTop: '2rem',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        flexWrap: 'wrap',
-        gap: '1.5rem'
-      }}>
-        <div>
-          <div style={{
-            background: 'rgba(0, 120, 212, 0.1)',
-            color: 'var(--ms-blue)',
-            padding: '0.25rem 0.75rem',
-            borderRadius: '12px',
-            fontSize: '0.8rem',
-            fontWeight: '600',
-            display: 'inline-block',
-            marginBottom: '1rem'
-          }}>
-            Official Resources
-          </div>
-          <h3 style={{marginBottom: '0.5rem'}}>Connect with Microsoft</h3>
-          <p style={{color: 'var(--ms-gray-70)'}}>
-            Access official documentation, training, and community resources directly from Microsoft
-          </p>
-        </div>
-        <div style={{display: 'flex', gap: '1rem', flexWrap: 'wrap'}}>
-          <a 
-            href="https://learn.microsoft.com/en-us/dynamics365/" 
-            className="cta-button secondary"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-          <a 
-            href="https://community.dynamics.com/" 
-            className="cta-button secondary"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Community
-          </a>
-        </div>
-      </div>
     </div>
   );
 };
